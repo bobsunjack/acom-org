@@ -1,0 +1,103 @@
+// Acom.idl : ActiveX 控件项目的类型库源。
+
+// 此文件将由 MIDL 编译器工具处理以
+// 产生类型库(Acom.tlb)，该类型库将成为
+// Acom.ocx.
+
+#include <olectl.h>
+#include <idispids.h>
+
+[ uuid(FAB9D140-C641-48D1-B49A-3EB2BE9E9C6E), version(1.0),
+  control ]
+library AcomLib
+{
+	importlib(STDOLE_TLB);
+
+	//  CAcomCtrl 的主调度接口
+	[ 
+		uuid(44FB3261-2DF3-4596-9527-FE963F540F25)	
+	]
+	dispinterface _DAcom
+	{
+		properties:
+			[id(1) ] BSTR DeviceType;
+			[id(2) ] BSTR Token;
+			[id(3) ] BSTR HostIP;
+			[id(4) ] LONG HostPort;
+			[id(5) ] LONG ConfigPort;
+			[id(6) ] LONG ChannelNo;
+			[id(7) ] LONG writeLog;
+			[id(8) ] VARIANT hostWin;
+			[id(9) ] LONG LinkMode;
+			[id(10) ] LONG Fluency;
+			[id(11) ] LONG DisplayBuffer;
+			[id(12) ] BSTR LoginUser;
+			[id(13) ] BSTR Password;
+			[id(14) ] LONG DVRID;
+			[id(18) ] LONG PTZCommandID;
+			[id(19) ] LONG PTZControlEnabled;
+			[id(20) ] LONG PTZPresetIndex;
+			[id(21) ] LONG PTZSpeed;
+			[id(23) ] LONG Brightness;
+			[id(24) ] LONG Contrast;
+			[id(25) ] LONG Saturation;
+			[id(26) ] LONG Hue;
+			[id(27) ] BSTR SaveFilePath;
+			[id(28) ] BSTR SaveFileName;
+			[id(29) ] LONG Volume;
+			[id(34) ] BSTR StreamMediaId;
+			[id(35) ] BSTR StreamMediaIp;
+			[id(36) ] LONG StreamMediaPort;
+			[id(37) ] LONG ConnectionType;
+			[id(38) ] VARIANT_BOOL isPlaying;
+			[id(40) ] VARIANT_BOOL VoiceTalking;
+			[id(41) ] LONG canPtz;
+			[id(42) ] LONG canInfrared;
+			[id(43) ] LONG machineId;
+			[id(44) ] BSTR alarmUrl;
+			[id(45) ] BSTR alarmHostIp;
+			[id(46) ] LONG alarmPort;
+			[id(47) ] LONG VoiceTalkingVolume;
+	methods:
+
+			[id(DISPID_ABOUTBOX)] void AboutBox();
+			[id(15)] void StartPlay(void);
+			[id(16)] void StopPlay(void);
+			[id(17)] LONG GetLastError(void);
+			[id(22)] VARIANT_BOOL SendPTZControlCommand(void);
+			[id(30)] VARIANT_BOOL CapturePicture(void);
+			[id(31)] BSTR AudioOpen(void);
+			[id(32)] VARIANT_BOOL AudioClose(void);
+			[id(33)] VARIANT_BOOL SetVideoEffect(void);
+			[id(39)] void FaceRecognition(void);
+	};
+
+	//  CAcomCtrl 的事件调度接口
+
+	[ 
+		uuid(0731A0EF-DAA1-4DDD-B7C1-B7473A4164F8)	
+	]
+	dispinterface _DAcomEvents
+	{
+		properties:
+			//  事件接口没有任何属性
+
+		methods:
+			[id(1)] void ondblclick(void);
+			[id(2)] void onclick(void);
+			[id(3)] void onStartPlay(void);
+			[id(4)] void OnGetVideoEffect(void);
+			[id(5)] void OnStartPlayError(void);
+	};
+
+	//  CAcomCtrl 的类信息
+	[
+		uuid(6CB6C1B5-0E0D-4622-8510-DF1EB6350050)
+	]
+	coclass Acom
+	{
+		[default] dispinterface _DAcom;
+		[default, source] dispinterface _DAcomEvents;
+	};
+
+};
